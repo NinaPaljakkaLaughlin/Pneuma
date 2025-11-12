@@ -4,6 +4,7 @@
   padding: 0;
   box-sizing: border-box;
   font-family: "Poppins", sans-serif;
+
 }
 
 body {
@@ -34,6 +35,7 @@ body {
   font-weight: 600;
   font-size: 1rem;
   letter-spacing: 0.5px;
+  cursor: pointer;
 }
 
 .nav-buttons {
@@ -77,6 +79,11 @@ button {
   flex-wrap: wrap;
 }
 
+.card-link {
+  text-decoration: none;
+  color: inherit;
+}
+
 .card {
   width: 250px;
   height: 320px;
@@ -115,4 +122,35 @@ h2 {
   font-size: 1.1rem;
   letter-spacing: 0.5px;
   font-weight: 500;
+}
+
+
+/* Mood Page */
+.mood-card {
+    width: 150px;
+    height: 150px;
+    border-radius: 10rem;
+    font-size: 2rem;
+    gap: 0.5rem;
+}
+
+.mood-card h2 {
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+.add-mood {
+  border: 2px dashed rgba(255, 255, 255, 0.4);
+}
+
+.add-mood:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.mood-card:hover {
+  transform: translateY(-10px) scale(1.05);
+}
+
+.mood-container{
+    padding-top: 5rem;
 }
