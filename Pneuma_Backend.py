@@ -1,4 +1,6 @@
-from flask import Flask 
+from flask import Flask, request, render_template, session 
+
+app.secret_key = "supersecretkey"
 
 app = Flask(__name__)
 
@@ -66,6 +68,7 @@ def experience():
 def home(): 
     return "Welcome to Pneuma!/n A Place to Catch Your Breathe."   
 
-@app.route("/experience")
+
+
 if __name__ == "_main":
-    app.run()
+    app.run(debug=True)
