@@ -1,11 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Study Session</title>
+  <link rel="stylesheet" href="session.css">
 </head>
 <body>
-    
+    <header class="navbar">
+        <div class="logo">LOGO Pneuma</div>
+        <div class="nav-buttons">
+        <a href="index.html"><button class="menu-btn">← Back</button></a>
+    </div>
+    </header>
+  <div class="session-wrapper">
+    <div class="session-card">
+      <div class="session-header">
+        <h2>Study Session</h2>
+        <span id="timer">25:00</span>
+      </div>
+
+      <div class="arc-container">
+        <svg viewBox="0 0 400 240" class="progress-arc">
+        <!-- Background arc (light transparent) -->
+        <path d="M20 200 A180 180 0 0 1 380 200" 
+                stroke="rgba(255,255,255,0.3)" 
+                stroke-width="16" 
+                fill="none" />
+        
+        <!-- Foreground progress arc -->
+        <path id="progressPath" 
+                d="M20 200 A180 180 0 0 1 380 200" 
+                stroke="#fff" 
+                stroke-width="16" 
+                fill="none" 
+                stroke-linecap="round" 
+                stroke-dasharray="565" 
+                stroke-dashoffset="565"/>
+        </svg>
+
+        <div id="tracker"></div>
+      </div>
+      <button id="startBtn">Start</button>
+    </div>
+  </div>
+
+  <script src="session.js"></script>
 </body>
 </html>

@@ -10,7 +10,7 @@
   <header class="navbar">
     <div class="logo">LOGO Pneuma</div>
     <div class="nav-buttons">
-      <button class="menu-btn">☰ Menu</button>
+      <button class="menu-btn">☰ Log in</button>
     </div>
   </header>
 
@@ -42,5 +42,62 @@
         </a>
     </div>
   </main>
+
+<!--  Menu -->
+<div class="menu-overlay" id="menuOverlay">
+  <div class="overlay-content">
+    <button class="close-btn" id="closeMenu">✖</button>
+
+    <!-- LOGIN-->
+    <div class="login-card" id="loginCard">
+      <h2>Log into your account</h2>
+      <form>
+        <label>Username/Email</label>
+        <input type="email" placeholder="Enter your username or email" />
+
+        <label>Password</label>
+        <input type="password" placeholder="Enter your password" />
+
+        <div class="options">
+          <label><input type="checkbox" /> Remember me</label>
+          <a href="#">Forgot?</a>
+        </div>
+
+        <button type="submit" class="login-btn">Log In</button>
+
+        <p class="signup-text">
+          Don’t have an account? <a href="#" id="showSignup">Sign Up</a>
+        </p>
+      </form>
+    </div>
+
+    <!-- SIGNUP-->
+    <div class="login-card hidden" id="signupCard">
+      <h2>Create an account</h2>
+      <form>
+        <label>Username</label>
+        <input type="text" placeholder="Choose a username" />
+
+        <label>Email</label>
+        <input type="email" placeholder="Enter your email" />
+
+        <label>Password</label>
+        <input type="password" placeholder="Create a password" />
+
+        <label>Confirm Password</label>
+        <input type="password" placeholder="Re-enter your password" />
+
+        <button type="submit" class="login-btn">Sign Up</button>
+
+        <p class="signup-text">
+          Already have an account? <a href="#" id="showLogin">Log In</a>
+        </p>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+  <script src="script.js"></script>
 </body>
 </html>
