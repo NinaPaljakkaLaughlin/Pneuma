@@ -11,7 +11,7 @@ body {
     flex-direction: column;
     background: #fff;
     color: #111;
-    background-image: url(images/SVG/background_gradient.svg);
+    background-image: url('../images/SVG/background_gradient.svg');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;

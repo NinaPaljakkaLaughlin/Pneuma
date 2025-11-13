@@ -4,16 +4,16 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Your Mood - Pneuma</title>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
   <header class="navbar">
     <div class="logo">Pneuma</div>
     <nav>
       <ul>
-        <li><a href="index.html">home</a></li>
-        <li><a href="finished.html">finished</a></li>
-        <li><a href="session.html">session</a></li>
+        <li><a href="{{ url_for('home') }}">home</a></li>
+        <li><a href="{{ url_for('session_page') }}">session</a></li>
+        <li><a href="{{ url_for('finished') }}">finished</a></li>
       </ul>
     </nav>
     <div class="nav-right">
@@ -24,15 +24,60 @@
   <main class="main-content">
     <h1 class="title">How are you feeling?</h1>
     <div class="card-container mood-container">
-        <div class="card mood-card">😵‍💫 <h2>Unfocused</h2></div>
-        <div class="card mood-card">😰 <h2>Stressed</h2></div>
-        <div class="card mood-card">😣 <h2>Anxious</h2></div>
-        <div class="card mood-card">😌 <h2>Calm</h2></div>
-        <div class="card mood-card">😴 <h2>Tired</h2></div>
-        <div class="card mood-card">🤩 <h2>Energetic</h2></div>
-        <div class="card mood-card">😁 <h2>Happy</h2></div>
-        <div class="card mood-card">😎 <h2>Confident</h2></div>
+        <div class="card mood-card" data-mood="unfocused" data-time="10">😵‍💫 <h2>Unfocused</h2></div>
+        <div class="card mood-card" data-mood="stressed" data-time="20">😰 <h2>Stressed</h2></div>
+        <div class="card mood-card" data-mood="anxious" data-time="15">😣 <h2>Anxious</h2></div>
+        <div class="card mood-card" data-mood="calm" data-time="30">😌 <h2>Calm</h2></div>
+        <div class="card mood-card" data-mood="tired" data-time="25">😴 <h2>Tired</h2></div>
+        <div class="card mood-card" data-mood="energetic" data-time="55">🤩 <h2>Energetic</h2></div>
+        <div class="card mood-card" data-mood="happy" data-time="30">😊 <h2>Happy</h2></div>
+        <div class="card mood-card" data-mood="confident" data-time="45">😎 <h2>Confident</h2></div>
     </div>
   </main>
+
+  <script>
+    // Handle mood selection
+    document.querySelectorAll('.mood-card').forEach(card => {
+      card.addEventListener('click', async () => {
+        const mood = card.dataset.mood;
+        const studyTime = card.dataset.time;
+        
+        console.log('Mood clicked:', mood, 'Time:', studyTime); // Debug
+        
+        // Store mood and time in localStorage
+        localStorage.setItem('selectedMood', mood);
+        localStorage.setItem('studyTime', studyTime);
+        
+        console.log('Saved to localStorage:', localStorage.getItem('selectedMood'), localStorage.getItem('studyTime')); // Debug
+        
+        // Send to backend
+        try {
+          const formData = new FormData();
+          formData.append('emotion', mood);
+          
+          const response = await fetch('/mood', {
+            method: 'POST',
+            body: formData
+          });
+          
+          console.log('Backend response:', response.status); // Debug
+          
+          if (response.ok) {
+            console.log('Redirecting to session page...'); // Debug
+            // Redirect to session page
+            window.location.href = '/session';
+          } else {
+            console.error('Backend error:', response.status);
+            alert('Error saving mood. Redirecting anyway...');
+            window.location.href = '/session';
+          }
+        } catch (error) {
+          console.error('Failed to save mood:', error);
+          alert('Error connecting to server. Redirecting anyway...');
+          window.location.href = '/session';
+        }
+      });
+    });
+  </script>
 </body>
 </html>

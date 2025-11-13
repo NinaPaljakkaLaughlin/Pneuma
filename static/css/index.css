@@ -8,7 +8,7 @@
 }
 
 body {
-    background-image: url(images/SVG/background_gradient.svg);
+    background-image: url('../images/SVG/background_gradient.svg');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -67,10 +67,18 @@ button {
 .title {
   font-size: 4rem;
   font-weight: 700;
-  margin-bottom: 3rem;
+  margin-bottom: 1rem;
+  margin-top: 0;
+  padding: 0;
   cursor: pointer;
 }
-
+.line {
+  font-size: 1.2rem;
+  margin-bottom: 4rem;
+  margin-top: 0;
+  padding: 0;
+  color: #333;
+}
 /* Cards Section */
 .card-container {
   columns: 3;

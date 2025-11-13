@@ -4,16 +4,84 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Finished Sessions</title>
-  <link rel="stylesheet" href="finished.css" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/finished.css') }}">
+  <style>
+    .xp-display {
+      background: rgba(255, 255, 255, 0.3);
+      padding: 1rem 2rem;
+      border-radius: 1rem;
+      margin-bottom: 2rem;
+      text-align: center;
+      font-size: 1.2rem;
+      font-weight: 600;
+    }
+    
+    .xp-earned {
+      color: #4caf50;
+      font-size: 1.5rem;
+      margin: 0.5rem 0;
+    }
+    
+    .card {
+      position: relative;
+    }
+    
+    .card-xp {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: rgba(0, 0, 0, 0.6);
+      color: white;
+      padding: 0.3rem 0.7rem;
+      border-radius: 0.5rem;
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+    
+    .card.locked {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+    
+    .card.locked::after {
+      content: '🔒';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 3rem;
+    }
+    
+    .add-xp-btn {
+      background: #4caf50;
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 0.5rem;
+      font-size: 0.9rem;
+      cursor: pointer;
+      margin-top: 0.5rem;
+      transition: 0.3s;
+    }
+    
+    .add-xp-btn:hover {
+      background: #45a049;
+    }
+    
+    .add-xp-btn:disabled {
+      background: #ccc;
+      cursor: not-allowed;
+    }
+  </style>
 </head>
 <body>
   <header class="navbar">
     <div class="logo">Pneuma</div>
     <nav>
       <ul>
-        <li><a href="index.html">home</a></li>
-        <li><a href="session.html">session</a></li>
-        <li><a href="mood.html">mood</a></li>
+        <li><a href="{{ url_for('home') }}">home</a></li>
+        <li><a href="{{ url_for('mood_reader') }}" class="card-link">mood</a></li>
+        <li><a href="{{ url_for('session_page') }}" class="card-link">session</a></li>
       </ul>
     </nav>
     <div class="nav-right">
@@ -22,34 +90,137 @@
   </header>
 
   <main class="content">
-    <h1>your <span>finished</span> sessions</h1>
+    <h1>your <span>rewards</span></h1>
+    
+    <div class="xp-display" id="xpDisplay">
+      <div>Total XP: <span id="totalXP">0</span></div>
+      <div class="xp-earned" id="earnedXP"></div>
+    </div>
 
     <div class="grid">
-      <div class="card yellow">
+      <div class="card yellow" data-reward="movie" data-cost="20">
+        <span class="card-xp">20 XP</span>
         <p class="title">movie night</p>
-        <span class="tag">20</span>
+        <span class="tag" id="movie-count">0</span>
+        <button class="add-xp-btn" onclick="claimReward('movie', 20)">Claim</button>
       </div>
-      <div class="card gray">
+      <div class="card gray" data-reward="book" data-cost="30">
+        <span class="card-xp">30 XP</span>
         <p class="title">new book</p>
-        <span class="tag">30</span>
+        <span class="tag" id="book-count">0</span>
+        <button class="add-xp-btn" onclick="claimReward('book', 30)">Claim</button>
       </div>
-      <div class="card pink">
+      <div class="card pink" data-reward="clothes" data-cost="40">
+        <span class="card-xp">40 XP</span>
         <p class="title">clothes</p>
-        <span class="tag">40</span>
+        <span class="tag" id="clothes-count">0</span>
+        <button class="add-xp-btn" onclick="claimReward('clothes', 40)">Claim</button>
       </div>
-      <div class="card green">
+      <div class="card green" data-reward="game" data-cost="70">
+        <span class="card-xp">70 XP</span>
         <p class="title">new game</p>
-        <span class="tag">70</span>
+        <span class="tag" id="game-count">0</span>
+        <button class="add-xp-btn" onclick="claimReward('game', 70)">Claim</button>
       </div>
-      <div class="card orange">
+      <div class="card orange" data-reward="concert" data-cost="100">
+        <span class="card-xp">100 XP</span>
         <p class="title">concert</p>
-        <span class="tag">100</span>
+        <span class="tag" id="concert-count">0</span>
+        <button class="add-xp-btn" onclick="claimReward('concert', 100)">Claim</button>
       </div>
-      <div class="card black">
+      <div class="card black" data-reward="travel" data-cost="500">
+        <span class="card-xp">500 XP</span>
         <p class="title">travel</p>
-        <span class="tag">500</span>
+        <span class="tag" id="travel-count">0</span>
+        <button class="add-xp-btn" onclick="claimReward('travel', 500)">Claim</button>
       </div>
     </div>
   </main>
+
+  <script>
+    // Rewards data structure
+    const rewards = {
+      movie: { cost: 20, count: 0 },
+      book: { cost: 30, count: 0 },
+      clothes: { cost: 40, count: 0 },
+      game: { cost: 70, count: 0 },
+      concert: { cost: 100, count: 0 },
+      travel: { cost: 500, count: 0 }
+    };
+
+    // Load data from localStorage
+    function loadData() {
+      const savedRewards = localStorage.getItem('rewards');
+      if (savedRewards) {
+        Object.assign(rewards, JSON.parse(savedRewards));
+      }
+      
+      const totalXP = parseInt(localStorage.getItem('totalXP') || '0');
+      const lastXPEarned = parseInt(localStorage.getItem('lastXPEarned') || '0');
+      
+      document.getElementById('totalXP').textContent = totalXP;
+      
+      if (lastXPEarned > 0) {
+        document.getElementById('earnedXP').textContent = `+${lastXPEarned} XP earned!`;
+        localStorage.removeItem('lastXPEarned');
+      }
+      
+      // Update all counts
+      Object.keys(rewards).forEach(key => {
+        document.getElementById(`${key}-count`).textContent = rewards[key].count;
+      });
+      
+      updateCardStates();
+    }
+
+    // Save data to localStorage
+    function saveData() {
+      localStorage.setItem('rewards', JSON.stringify(rewards));
+    }
+
+    // Claim a reward (spend XP)
+    function claimReward(rewardType, cost) {
+      const totalXP = parseInt(localStorage.getItem('totalXP') || '0');
+      
+      if (totalXP >= cost) {
+        rewards[rewardType].count++;
+        const newTotal = totalXP - cost;
+        localStorage.setItem('totalXP', newTotal.toString());
+        
+        document.getElementById('totalXP').textContent = newTotal;
+        document.getElementById(`${rewardType}-count`).textContent = rewards[rewardType].count;
+        
+        saveData();
+        updateCardStates();
+        
+        // Show success message
+        document.getElementById('earnedXP').textContent = `Claimed ${rewardType}! -${cost} XP`;
+        document.getElementById('earnedXP').style.color = '#ff7b00';
+      } else {
+        alert(`Not enough XP! You need ${cost} XP but only have ${totalXP} XP.`);
+      }
+    }
+
+    // Update card states (locked/unlocked)
+    function updateCardStates() {
+      const totalXP = parseInt(localStorage.getItem('totalXP') || '0');
+      
+      document.querySelectorAll('.card').forEach(card => {
+        const cost = parseInt(card.dataset.cost);
+        const button = card.querySelector('.add-xp-btn');
+        
+        if (totalXP < cost) {
+          card.classList.add('locked');
+          button.disabled = true;
+        } else {
+          card.classList.remove('locked');
+          button.disabled = false;
+        }
+      });
+    }
+
+    // Initialize
+    loadData();
+  </script>
 </body>
 </html>

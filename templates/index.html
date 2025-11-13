@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Pneuma</title>
-  <link rel="stylesheet" href="index.css" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
 </head>
 <body>
   <header class="navbar">
@@ -16,28 +16,29 @@
 
   <main class="main-content">
     <h1 class="title">Pneuma</h1>
+    <p class="line">Welcome to Pneuma! A Place to Catch Your Breathe.</p>
     <div class="card-container">
-        <a href="mood.html" class="card-link">
+        <a href="{{ url_for('mood_reader') }}" class="card-link">
         <div class="card">
             <span class="tag">mood</span>
-            <div class="icon">✚</div>
+            <div class="icon">🫶</div>
             <h2>How are you feeling?</h2>
         </div>
         </a>
 
-        <a href="session.html" class="card-link">
+        <a href="{{ url_for('session_page') }}" class="card-link">
         <div class="card">
             <span class="tag">new session</span>
-            <div class="icon">⬢</div>
+            <div class="icon">🔥</div>
             <h2>Start new session</h2>
         </div>
         </a>
 
-        <a href="finished.html" class="card-link"></a>
+        <a href="{{ url_for('finished') }}" class="card-link">
         <div class="card">
-            <span class="tag">Finished</span>
-            <div class="icon">▲</div>
-            <h2>You succesfully finnished 7 study session</h2>
+            <span class="tag">Rewards</span>
+            <div class="icon">✨</div>
+            <h2 id="rewardText">View your rewards</h2>
         </div>
         </a>
     </div>
@@ -66,7 +67,7 @@
         <button type="submit" class="login-btn">Log In</button>
 
         <p class="signup-text">
-          Don’t have an account? <a href="#" id="showSignup">Sign Up</a>
+          Don't have an account? <a href="#" id="showSignup">Sign Up</a>
         </p>
       </form>
     </div>
@@ -97,7 +98,13 @@
   </div>
 </div>
 
-
-  <script src="script.js"></script>
+  <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+  <script>
+    // Update reward text with total XP
+    const totalXP = parseInt(localStorage.getItem('totalXP') || '0');
+    if (totalXP > 0) {
+      document.getElementById('rewardText').textContent = `You have ${totalXP} XP!`;
+    }
+  </script>
 </body>
 </html>
