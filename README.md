@@ -6,7 +6,7 @@ Pneuma will help you catch your breath. Built to support students with managing 
 
 With Pneuma you can learn to balance wellness in all areas of your student life, and reward yourself for the balance! 
 
-How it works: 
+**How it works:** 
     Visit the Pneuma website when you sit down to do your studies, select your current mood, and you will be prompted with study and rest intervals based on your mood. Gain XP for every study and rest interval that you complete and use your XP towards your financial and life goals!
 
 Try it here! {demo link}
