@@ -10,7 +10,7 @@ With Pneuma you can learn to balance wellness in all areas of your student life,
     Visit the Pneuma website when you sit down to do your studies, select your current mood, and you will be prompted with study and rest intervals based on your mood. Gain XP for every study and rest interval that you complete and use your XP towards your financial and life goals!
 
 Try it here!
-https://team11.hackplay.eu/
+https://team11.hackplay.eu/  <br />
 **Navigation (Brackets indicate directories):**
 
 ├── [Pneuma]/                          <br />
