@@ -12,7 +12,7 @@ Navigation (Brackets indicate directories):
 │   │       └── style.css            <br />
 │   │   └── [js]/                      <br />
 │   │       ├── script.js            <br />
-│   │       └── session.css          <br />
+│   │       └── session.js          <br />
 │   │   ├── [images]/                  <br />
 │   │   ├── [SVG]/                     <br />
 │   │       ├── background_gradient.svg  <br />
