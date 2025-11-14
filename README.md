@@ -1,6 +1,16 @@
 # Pneuma
 B.A.L.L.S Hackathon 2025: Create a web application with a team, based around the given word - Autonomy. 
 
+**About Pneuma**
+Pneuma will help you catch your breath. Built to support students with managing the great balancing act - studies, mental health, and financial wellness. 
+
+With Pneuma you can learn to balance wellness in all areas of your student life, and reward yourself for the balance! 
+
+How it works: 
+    Visit the Pneuma website when you sit down to do your studies, select your current mood, and you will be prompted with study and rest intervals based on your mood. Gain XP for every study and rest interval that you complete and use your XP towards your financial and life goals!
+
+Try it here! {demo link}
+
 **Navigation (Brackets indicate directories):**
 
 ├── [Pneuma]/                          <br />
