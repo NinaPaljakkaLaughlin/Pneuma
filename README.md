@@ -5,15 +5,15 @@ Navigation:
 ├── Pneuma/
 │   ├── static/
 │   │   ├── css/
-│   │       ├── index.css
-│   │       ├── finished.css
-│   │       ├── session.css
-│   │       └── style.css
-│   │   └── js/
-│   │       ├── script.js
-│   │       └── session.css
+│   │   │   ├── index.css
+│   │   │   ├── finished.css
+│   │   │   ├── session.css
+│   │   │   └── style.css
+│   │   ├── js/
+│   │   │   ├── script.js
+│   │   │   └── session.js
 │   │   ├── images/
-│   │   ├── SVG/
+│   │   └── SVG/
 │   │       ├── background_gradient.svg
 │   │       ├── gradient_circle_dark.svg
 │   │       ├── gradient_circle_light.svg
@@ -27,4 +27,5 @@ Navigation:
 │
 ├── venv/
 └── Pneuma_Backend.py
+
 
