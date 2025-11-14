@@ -1,7 +1,7 @@
 # Pneuma
 B.A.L.L.S Hackathon 2025: Create a web application with a team, based around the given word - Autonomy. 
 
-Navigation (Brackets indicate directories):
+**Navigation (Brackets indicate directories):**
 
 ├── [Pneuma]/                          <br />
 │   ├── [static]/                      <br />
@@ -29,4 +29,6 @@ Navigation (Brackets indicate directories):
 ├── venv/  <br />
 └── Pneuma_Backend.py  <br />
 
+**Setup and local hosting instructions:**
 
+Once you have the files downloaded, head to the root directory via the terminal (cd command in command line, or whatever the equivalent is on your OS) and run Pneuma_Backend.py via command python Pneuma_Backend.py
